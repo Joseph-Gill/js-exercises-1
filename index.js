@@ -88,6 +88,56 @@ const countAuthors = array => {
 // will be made up of ‘.’. You need to find out if the cat can catch the mouse from it’s
 // current position. The cat can jump three characters.
 
-isCaught('C.....m') // => false
-isCaught('C..m') // => true
-isCaught('..C..m') // => true
+const isCaught = string => {
+    let cIndex = string.indexOf('C')
+    let mIndex = string.indexOf('m')
+    return mIndex - 3 <= cIndex;
+}
+
+// console.log(isCaught('C.....m')) // => false
+// console.log(isCaught('C..m')) // => true
+// console.log(isCaught('..C..m')) // => true
+
+// Write a function to balance who has overpaid and should be compensated or who has paid less.
+// The function should take one parameter: an object which represents the members of the group
+// and the amount spent by each. The function should return an object with the same names,
+// showing how much money the members should pay or receive. Negative number means they should
+// receive money.
+
+const group = {
+    Amy: 20,
+    Bill: 15,
+    Chris: 10
+}
+
+const splitTheBill = obj => {
+    let result = {}
+    let payments = Object.values(obj)
+    let individualBill = payments.reduce((a, b) => a + b) / payments.length
+    for (const [key, value] of Object.entries(obj)) {
+        result[key] = individualBill - value
+    }
+    return result
+}
+
+// console.log(splitTheBill(group)); // => { Amy: -5, Bill: 0, Chris: 5 }
+
+// Write a function that takes two integers. The first one will be the base b and the second
+// one n will be the exponent. The function should return the value of b raised to the power n.
+// Try to solve it with recursion. You can try it with a while loop first and then try to
+// implement the recursive approach.
+
+const exp = (num, pow) => {
+    if (pow === 0) {
+        return 1
+    }
+    if (pow === 1) {
+        return num;
+    }
+    return num * exp(num, pow - 1);
+}
+
+// console.log(exp(5, 3)); // => 125
+// console.log(exp(2, 4)); // => 16
+// console.log(exp(5, 1)); // => 5
+// console.log(exp(6, 0)); // => 1
