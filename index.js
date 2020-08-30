@@ -141,3 +141,55 @@ const exp = (num, pow) => {
 // console.log(exp(2, 4)); // => 16
 // console.log(exp(5, 1)); // => 5
 // console.log(exp(6, 0)); // => 1
+
+// You need to create a program that will translate from English to Pig Latin. Pig Latin takes the first consonant
+// (or consonant cluster) of an English word, moves it to the end of the word and suffixes an “ay”. If a word begins with
+// a vowel you just add “way” to the end. It might not be obvious but you need to remove all the consonants up to the first
+// vowel in case the word does not start with a vowel.
+
+
+const translatePigLatin = (engString) => {
+    let testString = 'aeiou';
+    if (testString.includes(engString[0])) {
+        return engString + 'way';
+    }
+    let endOfWord = [];
+    let pigWord = [];
+    for (i in engString.split('')) {
+        if (testString.includes(engString[i])) {
+            pigWord.push(engString.slice(i));
+            break;
+        } else {
+            endOfWord.push(engString[i]);
+        }
+    }
+    return pigWord.join('') + endOfWord.join('') + 'ay';
+};
+
+// console.log(translatePigLatin("glove")); // oveglay
+// console.log(translatePigLatin("pig")); // igpay
+// console.log(translatePigLatin("air")); // airway
+
+// You will create a program that takes a sentence, then search for a word in it and replaces
+// it for a new one while preserving the uppercase if there is one. For example:
+
+const myReplace = (stringToCheck, wordRemove, wordReplace) => {
+    let arrayToCheck = stringToCheck.split(' ');
+    let wordReplaceArray = wordReplace.split('');
+    for (i in arrayToCheck){
+        if (arrayToCheck[i].toLowerCase() === wordRemove.toLowerCase()) {
+            if (arrayToCheck[i][0] === arrayToCheck[i][0].toUpperCase()) {
+                wordReplaceArray.splice(0, 1, wordReplaceArray[0].toUpperCase());
+                arrayToCheck.splice(i, 1, wordReplaceArray.join(''));
+            } else {
+                wordReplaceArray.splice(0, 1, wordReplaceArray[0].toLowerCase());
+                arrayToCheck.splice(i, 1, wordReplaceArray.join(''));
+            }
+        }
+    }
+    return arrayToCheck.join(' ');
+}
+
+// console.log(myReplace("He is Sleeping on the couch", "Sleeping", "sitting")); // "He is Sitting on the couch"
+// console.log(myReplace("He is sleeping on the couch", "Sleeping", "sitting")); // "He is sitting on the couch"
+// console.log(myReplace("He is sleeping on the couch", "Sleeping", "Sitting")); // "He is sitting on the couch"
